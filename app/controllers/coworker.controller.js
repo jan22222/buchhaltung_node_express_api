@@ -30,14 +30,7 @@ const User = require("../models/user.model.js");
 			}
 		}
 		if (role==="admin"){
-			try {
-				console.log(user.role)
-				User.find({}, function(err, users){
-					return res.json(users).status(200)
-				})
-			} catch (error) {
-		        res.status(500).json({message: error.message});
-		    }
+			res.json({message: "An admin has no coworkers. Go to users."})
 		}
 console.log(err)
 return

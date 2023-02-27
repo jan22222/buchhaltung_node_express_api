@@ -8,7 +8,11 @@ const User = mongoose.model(
     username: String,
     email: String,
     password: String,
-    tasks:[TaskSchema],
+    tasks:[{
+      type: TaskSchema,
+      required: false,
+      default: null
+    }],
     role:{
       type: mongoose.Schema.Types.ObjectId,
       ref: "Role",

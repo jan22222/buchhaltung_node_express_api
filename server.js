@@ -22,19 +22,21 @@ db.mongoose
   });
 
   var corsOptions = {
-    origin: "http://localhost:8081"
+    origin: "*",
+    withCredentials: true
   };
   
   app.use(cors(corsOptions));
   
 
-app.use(function(req, res, next) {
-  res.header(
-    "Access-Control-Allow-Headers",
-    "x-access-token, Origin, Content-Type, Accept"
-  );
-  next();
-});
+  app.use(function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header(
+      'Access-Control-Allow-Headers',
+      'Origin, X-Requested-With, Content-Type, Accept'
+    );
+    next();
+  });
 
 const userroutes = require("./app/routes/user.routes.js")
 const authroutes = require("./app/routes/auth.routes.js")

@@ -63,7 +63,7 @@ export default class AddTask extends Component {
         ) : (
           <div>
             <div className="form-group">
-              <label htmlFor="title">Title</label>
+              <label htmlFor="title">Title2</label>
               <input
                 type="text"
                 className="form-control"

@@ -1,99 +1,67 @@
-import React, { Component } from "react";
-
-
-export default class AddTask extends Component {
-  constructor(props) {
-    super(props);
-    this.onChangeTitle = this.onChangeTitle.bind(this);
-    this.onChangeDescription = this.onChangeDescription.bind(this);
-    this.saveTutorial = this.saveTutorial.bind(this);
-    this.newTutorial = this.newTutorial.bind(this);
-
-    this.state = {
-      id: null,
-      title: "",
-      description: "", 
-      published: false,
-
-      submitted: false
-    };
+import React, { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+ 
+const SignIn = () => {
+  const [name, setName] = useState("");
+  const [password, setpassword] = useState("");
+  const navigate = useNavigate();
+ 
+  const signUser = async (e) => {
+    e.preventDefault();
+    fetch('https://jsonplaceholder.typicode.com/todos/1')
+    .then(response => response.json())
+    .then(json => console.log(json))
+    // try {
+    //   axios.post("http://localhost/signin", {
+    //     name,
+    //     password
+    //   });
+    //   navigate("/");
+    // } catch (error) {
+    //   console.log(error);
+    // }
   }
-
-  onChangeTitle(e) {
-    this.setState({
-      title: e.target.value
-    });
-  }
-
-  onChangeDescription(e) {
-    this.setState({
-      description: e.target.value
-    });
-  }
-
-  saveTutorial() {
-    var data = {
-      title: this.state.title,
-      description: this.state.description
-    };
-
-  }
-
-  newTutorial() {
-    this.setState({
-      id: null,
-      title: "",
-      description: "",
-      published: false,
-
-      submitted: false
-    });
-  }
-
-  render() {
-    return (
-      <div className="submit-form">
-        {this.state.submitted ? (
-          <div>
-            <h4>You submitted successfully!</h4>
-            <button className="btn btn-success" onClick={this.newTutorial}>
-              Add
-            </button>
-          </div>
-        ) : (
-          <div>
-            <div className="form-group">
-              <label htmlFor="title">Title</label>
+ 
+  return (
+    <div className="columns mt-5">
+      <div className="column is-half">
+        <form onSubmit={signUser}>
+          <div className="field">
+            <label className="label">Name</label>
+            <div className="control">
               <input
                 type="text"
-                className="form-control"
-                id="title"
-                required
-                value={this.state.title}
-                onChange={this.onChangeTitle}
-                name="title"
+                className="input"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Name"
               />
             </div>
-
-            <div className="form-group">
-              <label htmlFor="description">Description</label>
+          </div>
+          <div className="field">
+            <label className="label">password</label>
+            <div className="control">
               <input
                 type="text"
-                className="form-control"
-                id="description"
-                required
-                value={this.state.description}
-                onChange={this.onChangeDescription}
-                name="description"
+                className="input"
+                value={password}
+                onChange={(e) => setpassword(e.target.value)}
+                placeholder="password"
               />
             </div>
-
-            <button onClick={this.saveTutorial} className="btn btn-success">
-              Submit
-            </button>
           </div>
-        )}
+          <div className="field">
+            <div className="control">
+              <button type="submit" className="button is-success">
+                Sign in
+              </button>
+            </div>
+          </div>
+        </form>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
+ 
+export default SignIn;

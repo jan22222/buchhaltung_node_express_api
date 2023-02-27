@@ -1,99 +1,53 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
+ 
+const TaskList = () => {
+  const [tasks, setTask] = useState([]);
+ 
+  useEffect(() => {
+    getTasks();
+  }, []);
+ 
+  const getTasks = async () => {
+    const response = await axios.get("https://localhost:8080/tasks/all");
+    console.log(response.data)
+    setTask(response.data);
+  };
+ 
+ 
+  return (
+    <div className="columns mt-5">
+      <div className="column is-half">
+        <Link to="addTask" className="button is-success">
+          Add New
+        </Link>
+        <table className="table is-striped is-fullwidth mt-2">
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Title</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            {tasks.map((task, index) => (
+              <tr key={task._id}>
+                <td>{index + 1}</td>
+                <td>{task.title}</td>
+                <td>{task.description}</td>
 
-
-export default class AddTask extends Component {
-  constructor(props) {
-    super(props);
-    this.onChangeTitle = this.onChangeTitle.bind(this);
-    this.onChangeDescription = this.onChangeDescription.bind(this);
-    this.saveTutorial = this.saveTutorial.bind(this);
-    this.newTutorial = this.newTutorial.bind(this);
-
-    this.state = {
-      id: null,
-      title: "",
-      description: "", 
-      published: false,
-
-      submitted: false
-    };
-  }
-
-  onChangeTitle(e) {
-    this.setState({
-      title: e.target.value
-    });
-  }
-
-  onChangeDescription(e) {
-    this.setState({
-      description: e.target.value
-    });
-  }
-
-  saveTutorial() {
-    var data = {
-      title: this.state.title,
-      description: this.state.description
-    };
-
-  }
-
-  newTutorial() {
-    this.setState({
-      id: null,
-      title: "",
-      description: "",
-      published: false,
-
-      submitted: false
-    });
-  }
-
-  render() {
-    return (
-      <div className="submit-form">
-        {this.state.submitted ? (
-          <div>
-            <h4>You submitted successfully!</h4>
-            <button className="btn btn-success" onClick={this.newTutorial}>
-              Add
-            </button>
-          </div>
-        ) : (
-          <div>
-            <div className="form-group">
-              <label htmlFor="title">Title</label>
-              <input
-                type="text"
-                className="form-control"
-                id="title"
-                required
-                value={this.state.title}
-                onChange={this.onChangeTitle}
-                name="title"
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="description">Description</label>
-              <input
-                type="text"
-                className="form-control"
-                id="description"
-                required
-                value={this.state.description}
-                onChange={this.onChangeDescription}
-                name="description"
-              />
-            </div>
-
-            <button onClick={this.saveTutorial} className="btn btn-success">
-              Submit
-            </button>
-          </div>
-        )}
+                <td>
+                
+               
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
+ 
+export default TaskList;

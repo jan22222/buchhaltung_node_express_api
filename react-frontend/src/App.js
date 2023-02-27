@@ -44,7 +44,11 @@ const Navigation = () => {
       }}
     >
       <Link to="/">Home</Link>
+      <Link to="/addTask">Add Task</Link>
+      <Link to="/tasks">Tasks</Link>
       <Link to="/users">Users</Link>
+      <Link to="/signUp">Sign up</Link>
+      <Link to="/signIn">Sign in</Link>
     </nav>
   );
 };

@@ -4,7 +4,6 @@ const mongoose = require("mongoose");
 const CellSchema = new mongoose.Schema({
 	order:{
    		type:Number,
-		required: true,
 		unique: true
 	},
 	value:{

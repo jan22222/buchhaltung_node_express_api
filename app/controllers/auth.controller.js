@@ -7,6 +7,7 @@ var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
 
 exports.signup = (req, res) => {
+  
   if (req.body.role) {
     Role.findOne(
       {

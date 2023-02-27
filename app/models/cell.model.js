@@ -3,8 +3,7 @@ const mongoose = require("mongoose");
 
 const CellSchema = new mongoose.Schema({
 	order:{
-   		type:Number,
-		unique: true
+   		type:Number
 	},
 	value:{
    		type:Number,

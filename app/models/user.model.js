@@ -9,9 +9,8 @@ const User = mongoose.model(
     email: String,
     password: String,
     tasks:[{
-      type: TaskSchema,
-      required: false,
-      default: null
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Task"
     }],
     role:{
       type: mongoose.Schema.Types.ObjectId,
